@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+
+on: [push]  # Запускать при каждом push
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test 1
+        run: echo "this is test 1"
+      - name: Test 2
+        run: echo "this is test 2"
+
+  build:
+    name: Build Application
+    needs: test  # Зависит от успеха test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          echo "building .."
+          echo "building .."
+          echo "building ..."
+          echo "building successful"
+
+  deploy:
+    name: Deploy to Dev
+    needs: build  # Зависит от успеха build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy
+        run: echo "deploying to dev"
